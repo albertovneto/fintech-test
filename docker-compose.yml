@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  fintech-api:
+    build: .
+    container_name: fintech-api
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./.docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - fintech-network
+
+  nginx:
+    build: .docker/nginx
+    container_name: fintech-nginx
+    restart: always
+    tty: true
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+    networks:
+      - fintech-network
+    depends_on:
+      - fintech-api
+
+  mysql:
+    build: ./.docker/mysql
+    container_name: fintech-mysql
+    restart: always
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.docker/dbdata:/var/lib/mysql
+      - ./.docker/mysql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_DATABASE=fintech_test
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - fintech-network
+
+networks:
+  fintech-network:
+    driver: bridge
