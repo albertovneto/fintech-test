@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
-class BankAccountController extends Controller
+class AccountController extends Controller
 {
 
 }
