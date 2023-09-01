@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-class AccountController
+use App\Http\Controllers\Controller;
+
+class AccountController extends Controller
 {
 
 }
