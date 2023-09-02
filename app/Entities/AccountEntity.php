@@ -19,7 +19,7 @@ class AccountEntity
     {
         return [
             'id' => $this->id,
-            'account_balance' => $this->wallet?->balance
+            'balance' => $this->wallet?->balance
         ];
     }
 }

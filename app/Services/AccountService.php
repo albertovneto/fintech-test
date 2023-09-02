@@ -18,7 +18,7 @@ class AccountService
         return $this->accountRepository->create($accountCreateDto);
     }
 
-    public function getByAccountId(int $id)
+    public function getByAccountId(int $id): AccountEntity
     {
         return $this->accountRepository->getById($id);
     }

@@ -8,5 +8,5 @@ use App\Entities\AccountEntity;
 interface AccountRepositoryInterface
 {
     public function create(AccountWalletCreateInputDto $accountCreateDto): AccountEntity;
-    public function getById(int $id);
+    public function getById(int $id): AccountEntity;
 }

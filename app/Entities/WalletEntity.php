@@ -18,7 +18,7 @@ class WalletEntity
     {
         return [
             'id' => $this->id,
-            'cpf' => $this->cpf
+            'balance' => $this->balance
         ];
     }
 }

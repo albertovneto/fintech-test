@@ -17,7 +17,7 @@ class AccountWalletCreateOutputDto
     public function toArray(): array
     {
         return [
-            'account_id' => $this->accountId,
+            'id' => $this->accountId,
             'balance' => $this->balance,
         ];
     }
