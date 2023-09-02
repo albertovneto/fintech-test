@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('account_id')->unsigned();
-            $table->foreign('account_id')->references('id')->on('account');
+            $table->foreignId('account_id')->constrained(
+                table: 'account',
+                indexName: 'transactions_account_id'
+            );
             $table->float('fee');
             $table->float('total_value');
             $table->float('transaction_value');
