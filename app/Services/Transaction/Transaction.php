@@ -2,10 +2,9 @@
 
 namespace App\Services\Transaction;
 
+use App\Dto\TransactionInputDto;
+
 interface Transaction
 {
-    public function transfer();
-    public function payment();
-    public function calcFee(float $value);
-    public function total();
+    public function paymentValue(TransactionInputDto $transactionInputDto);
 }

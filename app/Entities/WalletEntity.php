@@ -9,8 +9,9 @@ class WalletEntity
     use MethodsMagicsTrait;
 
     public function __construct(
+        protected int $accountId,
         protected ?int $id = null,
-        protected float $balance = 0
+        protected float $balance = 0,
     ) {
     }
 
@@ -18,6 +19,7 @@ class WalletEntity
     {
         return [
             'id' => $this->id,
+            'account_id' => $this->accountId,
             'balance' => $this->balance
         ];
     }

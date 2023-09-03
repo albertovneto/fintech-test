@@ -32,10 +32,14 @@ class AccountRepository implements AccountRepositoryInterface
             ->first();
 
         if (empty($account)) {
-            throw new NotFoundException();
+            throw new NotFoundException('Account not found');
         }
 
-        $wallet = new WalletEntity($account->wallet_id, $account->balance);
+        $wallet = new WalletEntity(
+            accountId: $account->id,
+            id: $account->wallet_id,
+            balance: $account->balance
+        );
         return new AccountEntity($account->id, $account->cpf, $wallet);
     }
 }

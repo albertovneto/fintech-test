@@ -4,5 +4,5 @@ namespace App\Repositories\Contract;
 
 interface TransactionRepositoryInterface
 {
-    public function createTransaction();
+    public function create($transactionCreateDto);
 }

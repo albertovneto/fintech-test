@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AccountController;
+use App\Http\Controllers\Api\{
+    AccountController,
+    TransactionController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +18,11 @@ use App\Http\Controllers\Api\AccountController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::controller(AccountController::class)->group(function () {
     Route::get('/account/{id}', 'getById');
     Route::post('/account', 'create');
+});
+
+Route::controller(TransactionController::class)->group(function () {
+    Route::post('/transaction', 'transaction');
 });

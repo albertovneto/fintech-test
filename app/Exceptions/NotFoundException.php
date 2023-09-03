@@ -19,6 +19,6 @@ class NotFoundException extends Exception
     {
         return response()->json([
             'message' => $this->getMessage()
-        ], 404);
+        ], Response::HTTP_NOT_FOUND);
     }
 }
