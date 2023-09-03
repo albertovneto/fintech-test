@@ -2,16 +2,24 @@
 
 namespace App\Services\Transaction;
 
-use App\Dto\TransactionInputDto;
-use App\Dto\WalletUpdateInputDto;
-use App\Models\Account;
-use App\Models\Wallet;
-use App\Services\AccountService;
-use App\Services\WalletService;
+use App\Entities\TransactionEntity;
+use App\Repositories\Contract\TransactionRepositoryInterface;
+use App\Dto\{
+    PaymentValueDto,
+    TransactionInputCreateDto,
+    TransactionInputDto,
+    TransactionOutputDto,
+    WalletUpdateInputDto
+};
+use App\Services\{
+    AccountService,
+    WalletService
+};
 
 class TransactionService
 {
     public function __construct(
+        private TransactionRepositoryInterface $transactionRepository,
         private PaymentMethod $paymentMethod,
         private AccountService $accountService,
         private WalletService $walletService
@@ -30,11 +38,27 @@ class TransactionService
         $walletUpdateInputDto = new WalletUpdateInputDto(
             id: $accountData->wallet->id,
             accountId: $accountData->id,
-            balance: $this->walletService->balanceDiscount($accountData->wallet->balance, $paymentValue)
+            balance: $this->walletService->balanceDiscount($accountData->wallet->balance, $paymentValue->totalValue)
         );
 
-        $update = $this->walletService->update($walletUpdateInputDto);
+        $updatedWalletData = $this->walletService->update($walletUpdateInputDto);
+        $this->storeTransactionInfo($paymentValue, $transactionInputDto);
 
-        dd($update);
+        return new TransactionOutputDto($accountData->id, $updatedWalletData->balance);
+    }
+
+    private function storeTransactionInfo(
+        PaymentValueDto $paymentValueDto,
+        TransactionInputDto $transactionInputDto
+    ): TransactionEntity {
+        $transactionInputCreateDto = new TransactionInputCreateDto(
+            accountId: $transactionInputDto->accountId,
+            transactionValue: $paymentValueDto->transactionValue,
+            fee: $paymentValueDto->fee,
+            totalValue: $paymentValueDto->totalValue,
+            paymentMethod: $paymentValueDto->paymentMethod
+        );
+
+        return $this->transactionRepository->create($transactionInputCreateDto);
     }
 }

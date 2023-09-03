@@ -23,16 +23,4 @@ class TransactionInputDto
         $this->balance = $balance;
         return $this;
     }
-
-    public function setFee(float $fee): TransactionInputDto
-    {
-        $this->fee = $fee;
-        return $this;
-    }
-
-    public function setTotalValue(float $totalValue): TransactionInputDto
-    {
-        $this->totalValue = $totalValue;
-        return $this;
-    }
 }

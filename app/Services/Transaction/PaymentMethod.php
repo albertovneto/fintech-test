@@ -4,6 +4,9 @@ namespace App\Services\Transaction;
 
 use App\Enums\PaymentMethodsEnum;
 use App\Exceptions\NotFoundException;
+use App\Services\Transaction\PaymentMethods\Credit;
+use App\Services\Transaction\PaymentMethods\Debit;
+use App\Services\Transaction\PaymentMethods\Pix;
 
 class PaymentMethod
 {

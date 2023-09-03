@@ -34,9 +34,9 @@ class TransactionController extends Controller
                 transactionValue: $request->transaction_value
             );
 
-            $this->transactionService->execute($transactionInputDto);
+            $transactionOutput = $this->transactionService->execute($transactionInputDto);
 
-            return response()->json(['ok'], Response::HTTP_CREATED);
+            return response()->json($transactionOutput->toArray(), Response::HTTP_CREATED);
         } catch (ValidationException $validationException) {
             return response()->json(
                 ['message' => $validationException->getMessage()],

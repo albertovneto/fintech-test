@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Contract;
 
+use App\Dto\TransactionInputCreateDto;
+
 interface TransactionRepositoryInterface
 {
-    public function create($transactionCreateDto);
+    public function create(TransactionInputCreateDto $transactionInputCreateDto);
 }
