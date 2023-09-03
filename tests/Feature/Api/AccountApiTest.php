@@ -4,7 +4,6 @@ namespace Tests\Feature\Api;
 
 use App\Models\Account;
 use App\Models\Wallet;
-use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
@@ -13,10 +12,10 @@ class AccountApiTest extends TestCase
     public function testCreateAccount()
     {
         $request = [
-            'balance' => 0,
+            'balance' => 1,
         ];
 
-        $response = $this->json('POST', '/api/account', $request);
+        $response = $this->postJson('/api/account', $request);
 
         $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJsonStructure(['id', 'balance']);

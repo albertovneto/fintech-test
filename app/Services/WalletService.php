@@ -14,9 +14,9 @@ class WalletService
     ) {
     }
 
-    public function create(AccountWalletCreateInputDto $accountCreateDto): WalletEntity
+    public function create(AccountWalletCreateInputDto $accountWalletCreateDto): WalletEntity
     {
-        return $this->walletRepository->create($accountCreateDto);
+        return $this->walletRepository->create($accountWalletCreateDto);
     }
 
     public function update(WalletUpdateInputDto $walletUpdateInputDto): WalletEntity

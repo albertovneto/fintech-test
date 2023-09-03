@@ -20,9 +20,9 @@ class WalletRepository implements WalletRepositoryInterface
         $created = $this->model->create($accountWalletCreateDto->toArray());
 
         return new WalletEntity(
-            AccountId: $created->account_id,
-            Id: $created->id,
-            Balance: $created->balance
+            accountId: $created->account_id,
+            id: $created->id,
+            balance: $created->balance
         );
     }
 

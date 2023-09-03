@@ -26,7 +26,7 @@ class AccountController extends Controller
 
             return response()->json($accountWalletCreated->toArray(), 201);
         } catch(Throwable $t) {
-            return response()->json($t->getMessage(), 500);
+            return response()->json(['message' => $t->getMessage()], 500);
         }
     }
 

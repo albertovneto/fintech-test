@@ -15,7 +15,6 @@ use Throwable;
 
 class AccountServiceTest extends TestCase
 {
-
     public function testCreate()
     {
         $mockDto = Mockery::mock(AccountWalletCreateInputDto::class, [
@@ -46,7 +45,7 @@ class AccountServiceTest extends TestCase
         $mockAccountEntity = Mockery::mock(AccountEntity::class, [
             $accountId,
             '38779876567',
-            new WalletEntity(2, $balance)
+            new WalletEntity(2, null, $balance)
         ]);
 
         $repositoryMock = Mockery::mock(AccountRepository::class, AccountRepositoryInterface::class);
@@ -80,5 +79,11 @@ class AccountServiceTest extends TestCase
         } catch (Throwable $t) {
            $this->assertInstanceOf(NotFoundException::class, $t);
         }
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
     }
 }
