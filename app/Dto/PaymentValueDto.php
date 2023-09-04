@@ -10,7 +10,7 @@ class PaymentValueDto
 
     public function __construct(
         protected float $transactionValue,
-        protected int $fee,
+        protected float $fee,
         protected float $totalValue,
         protected string $paymentMethod
     ) {

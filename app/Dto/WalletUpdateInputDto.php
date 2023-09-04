@@ -11,7 +11,7 @@ class WalletUpdateInputDto
     public function __construct(
         protected int $id,
         protected int $accountId,
-        protected float|int $balance = 0,
+        protected float $balance = 0,
     ) {
     }
 }

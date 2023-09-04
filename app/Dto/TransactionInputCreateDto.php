@@ -11,7 +11,7 @@ class TransactionInputCreateDto
     public function __construct(
         protected int $accountId,
         protected float $transactionValue,
-        protected int $fee,
+        protected float $fee,
         protected float $totalValue,
         protected string $paymentMethod
     ) {
